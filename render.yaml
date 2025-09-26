@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: zainee-mengal-love-world
+    env: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: USER1_NAME
+        value: Zainee
+      - key: USER1_PASSWORD
+        sync: false
+      - key: USER2_NAME
+        value: Mengal
+      - key: USER2_PASSWORD
+        sync: false
+    disks:
+      - name: love-data
+        mountPath: /var/data
+        sizeGB: 1

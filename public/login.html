@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Zainee & Mengal</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">Zainee & Mengal</div>
+    </div>
+
+    <div class="login-box card">
+      <h2 class="center">Welcome to Our Secret Garden 💕</h2>
+      <p class="center" style="margin-top:6px; opacity:0.95; font-style:italic;">A timeless place for two hearts — enter with love.</p>
+      <form id="loginForm">
+        <label>Username</label>
+        <input name="username" placeholder="Zainee or Mengal" required />
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Your secret" required />
+        <button class="btn-primary" type="submit">Enter Our World</button>
+        <div id="err" style="color:#ffe; margin-top:8px;"></div>
+      </form>
+    </div>
+
+    <div class="footer">Made with infinite love 💖</div>
+  </div>
+  <script src="/static/js/main.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const fd = new FormData(form);
+      const payload = Object.fromEntries(fd.entries());
+      const res = await fetch('/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) {
+        document.getElementById('err').innerText = data.error || 'Login failed';
+      } else {
+        localStorage.setItem('love_user', payload.username);
+        location.href = data.redirect || '/home';
+      }
+    });
+  </script>
+</body>
+</html>

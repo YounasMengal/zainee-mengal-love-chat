@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Zainee & Mengal</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">Zainee & Mengal</div>
+      <div>
+        <a href="/home">Home</a>
+        <a href="/chat">Chat</a>
+        <a href="/lovewall">Love Wall</a>
+        <a href="/game">Mini-Game</a>
+        <a href="/music">Music</a>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <h1 class="hero">This world belongs only to Zainee &amp; Mengal 💕</h1>
+
+    <div class="card" style="margin-top:20px;">
+      <p>Welcome to your private universe. Float through soft stars and hearts, share whispers on the wind, and keep memories safe on your Love Wall. Dive into a cute game or play your favorite songs. Everything here is only for you two. 💖</p>
+      <div class="center" style="margin-top:10px;">
+        <button class="btn-primary" onclick="showSurprise()">Surprise Me ✨</button>
+      </div>
+    </div>
+
+    <div class="footer">Forever and always 🌙</div>
+  </div>
+  <script src="/static/js/main.js"></script>
+  <script>
+    if (!localStorage.getItem('love_user')) location.href = '/login';
+  </script>
+</body>
+</html>

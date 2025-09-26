@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Corner | Zainee & Mengal</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">Zainee & Mengal</div>
+      <div>
+        <a href="/home">Home</a>
+        <a href="/chat">Chat</a>
+        <a href="/lovewall">Love Wall</a>
+        <a href="/game">Mini-Game</a>
+        <a href="/music">Music</a>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Our Music Corner 🎵</h2>
+      <p>Add your favorite songs below. You can also paste Spotify or YouTube playlists.</p>
+      <div style="display:grid; gap:16px;">
+        <div class="card">
+          <h3>YouTube</h3>
+          <div class="center">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/2Vv-BfVoq4g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Spotify</h3>
+          <div class="center">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2hoC73ARWBX?utm_source=generator" width="560" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/main.js"></script>
+  <script>
+    if (!localStorage.getItem('love_user')) location.href = '/login';
+  </script>
+</body>
+</html>
