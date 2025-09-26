@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f4103767-3263-42fd-84b6-4f85a240b208/deploy-status)](https://app.netlify.com/projects/zainee/deploys)
+
 # Zainee & Mengal — Private Love World 💕
 
 A private, romantic chat website for two people only: Zainee and Mengal. Includes secure login, real-time chat with magical animations, a Love Wall to save sweet notes forever, a surprise quotes button, a mini tic-tac-toe game, and a shared music corner with YouTube/Spotify embeds.
