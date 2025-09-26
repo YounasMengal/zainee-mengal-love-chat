@@ -8,10 +8,11 @@ const bcrypt = require('bcrypt');
 const rateLimit = require('express-rate-limit');
 const http = require('http');
 const { Server } = require('socket.io');
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, FRONTEND_ORIGIN ? { cors: { origin: FRONTEND_ORIGIN, credentials: true } } : {});
 
 // Security headers
 app.use(helmet({
@@ -33,8 +34,15 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// CORS for split front-end/back-end deployments
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || '';
+if (FRONTEND_ORIGIN) {
+  app.use(cors({ origin: FRONTEND_ORIGIN, credentials: true }));
+}
+
 // Sessions
 const SESSION_SECRET = process.env.SESSION_SECRET || 'dev_secret_change_me';
+const USE_CROSS_SITE = process.env.USE_CROSS_SITE === '1';
 app.use(session({
   name: 'love.sess',
   secret: SESSION_SECRET,
@@ -43,7 +51,7 @@ app.use(session({
   cookie: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: USE_CROSS_SITE ? 'none' : 'lax',
     maxAge: 1000 * 60 * 60 * 24 // 1 day
   }
 }));

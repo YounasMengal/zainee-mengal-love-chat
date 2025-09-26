@@ -1,6 +1,7 @@
 (function(){
   const user = localStorage.getItem('love_user');
-  const socket = io({ auth: { username: user } });
+  // Support external backend (Netlify frontend) using window.BACKEND_URL
+  const socket = window.BACKEND_URL ? io(window.BACKEND_URL, { auth: { username: user }, transports: ['websocket','polling'] }) : io({ auth: { username: user } });
   const messages = document.getElementById('messages');
   const typingEl = document.getElementById('typing');
   const presence = document.getElementById('presence');

@@ -1,3 +1,19 @@
+// Backend URL bootstrapping for Netlify (front-end) + external backend
+// Priority: query ?backend=URL -> localStorage('backend_url') -> window.BACKEND_URL (inline script) -> same origin
+(()=>{
+  try {
+    const url = new URL(window.location.href);
+    const p = url.searchParams.get('backend');
+    if (p) {
+      localStorage.setItem('backend_url', p);
+    }
+    const stored = localStorage.getItem('backend_url');
+    if (stored && !window.BACKEND_URL) {
+      window.BACKEND_URL = stored;
+    }
+  } catch {}
+})();
+
 // Canvas floating hearts and stars
 const canvas = document.getElementById('bg-canvas');
 if (canvas) {
@@ -63,9 +79,15 @@ function showSurprise(){
   setTimeout(()=>{ el.remove(); }, 4000);
 }
 
+// Helper to prefix API with backend URL (for Netlify frontend + Render backend)
+function API(path){
+  const base = (typeof window !== 'undefined' && window.BACKEND_URL) ? window.BACKEND_URL : '';
+  return base + path;
+}
+
 // Logout helper
 async function logout(){
-  await fetch('/logout', { method: 'POST' });
+  await fetch(API('/logout'), { method: 'POST' });
   localStorage.removeItem('love_user');
   location.href = '/login';
 }
