@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600;700&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600;700&family=Great+Vibes&family=Cinzel:wght@400;600&display=swap');
 
 :root {
   --pink: #ff7eb3;
@@ -14,10 +14,20 @@ body {
   margin: 0;
   font-family: 'Playfair Display', serif;
   color: var(--light);
-  background: linear-gradient(135deg, rgba(255,126,179,0.9), rgba(138,79,255,0.9), rgba(112,193,255,0.9));
+  background: radial-gradient(1200px 800px at 20% 10%, rgba(255,126,179,0.25), transparent 60%),
+              radial-gradient(1200px 800px at 80% 90%, rgba(112,193,255,0.25), transparent 60%),
+              linear-gradient(135deg, rgba(255,126,179,0.9), rgba(138,79,255,0.9), rgba(112,193,255,0.9));
   background-size: 600% 600%;
   animation: gradientShift 20s ease infinite;
   overflow-x: hidden;
+}
+
+/* Vignette overlay for extra depth */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.25) 100%);
+  pointer-events: none; z-index: 0;
 }
 
 @keyframes gradientShift {
@@ -55,9 +65,9 @@ body {
   align-items: center;
   padding: 16px 24px;
   backdrop-filter: blur(8px);
-  background: rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
   margin: 16px;
 }
 
@@ -75,10 +85,10 @@ body {
 
 h1.hero {
   font-family: 'Great Vibes', cursive;
-  font-size: 42px;
+  font-size: 48px;
   text-align: center;
   margin-top: 40px;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  text-shadow: 0 6px 26px rgba(0,0,0,0.35);
 }
 
 /* Classic romantic headings */
@@ -87,13 +97,21 @@ h1, h2, h3 {
 }
 h2, h3 { font-family: 'Playfair Display', serif; }
 
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(45deg, #ffd1e6, #d9b3ff, #a8e0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 
 .card {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08));
+  border: 1px solid rgba(255,255,255,0.28);
   border-radius: 20px;
   padding: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .input, input, textarea {
@@ -120,13 +138,16 @@ input:focus, textarea:focus {
   border-radius: 14px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,126,179,0.0);
+  transition: transform .15s ease;
 }
 
 .btn-primary:hover {
   filter: brightness(1.06);
   box-shadow: 0 10px 24px rgba(0,0,0,0.35), 0 0 12px rgba(255,126,179,0.6);
 }
+
+.btn-primary:active { transform: translateY(1px) scale(0.99); }
 
 /* Pulsing glow for romantic buttons */
 @keyframes pulseGlow {
@@ -206,8 +227,8 @@ input:focus, textarea:focus {
   line-height: 1.4;
   animation: popIn 200ms ease;
 }
-.message.me { align-self: flex-end; background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.35); }
-.message.them { align-self: flex-start; background: rgba(0,0,0,0.18); border: 2px solid rgba(255,255,255,0.2); }
+.message.me { align-self: flex-end; background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.35); backdrop-filter: blur(6px); }
+.message.them { align-self: flex-start; background: rgba(0,0,0,0.18); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(6px); }
 .message .meta { font-size: 12px; opacity: 0.8; margin-top: 6px; }
 
 /* Heart tail using pseudo element */
@@ -239,10 +260,11 @@ input:focus, textarea:focus {
 .send-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 8px; }
 
 /* Love Wall */
-.notes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 12px; }
-.note { padding: 12px; border-radius: 16px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); position: relative; }
+.notes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-top: 12px; }
+.note { padding: 14px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border: 1px solid rgba(255,255,255,0.35); position: relative; box-shadow: 0 8px 22px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.18); }
 .note .by { font-size: 12px; opacity: 0.9; margin-top: 6px; }
-.note .del { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; cursor: pointer; }
+.note .del { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; cursor: pointer; transition: transform .15s ease; }
+.note .del:hover { transform: scale(1.05); }
 
 /* Game */
 .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 10px; justify-content: center; margin-top: 12px; }
