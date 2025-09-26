@@ -106,6 +106,12 @@ h2, h3 { font-family: 'Playfair Display', serif; }
   color: #fff;
 }
 
+input:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(255,126,179,0.8);
+  box-shadow: 0 0 0 4px rgba(255,126,179,0.25);
+}
+
 .btn-primary {
   background: linear-gradient(45deg, var(--pink), var(--purple));
   border: none;
@@ -148,6 +154,42 @@ h2, h3 { font-family: 'Playfair Display', serif; }
   max-width: 420px;
   margin: 60px auto;
 }
+
+.login-header {
+  position: relative;
+  text-align: center;
+}
+.login-header .title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 46px;
+  margin: 8px 0 0 0;
+  text-shadow: 0 6px 26px rgba(0,0,0,0.35);
+}
+.login-header .subtitle {
+  margin: 4px 0 14px 0;
+  opacity: 0.95;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+}
+.decor-hearts {
+  position: absolute;
+  left: 0; right: 0; top: -22px;
+  display: flex; justify-content: center; gap: 14px;
+  pointer-events: none;
+}
+.decor-hearts span { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35)); font-size: 22px; }
+
+.field {
+  position: relative;
+}
+.toggle-pass {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 10px;
+  color: #fff; font-size: 12px; padding: 4px 8px; cursor: pointer;
+}
+.error-text { color: #ffe; margin-top: 8px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.25); }
 
 /* Chat */
 .chat-wrapper { display: grid; grid-template-rows: 1fr auto; height: calc(100vh - 160px); }
